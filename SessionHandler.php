@@ -4,7 +4,7 @@
 * A PHP session handler to keep session data within a MySQL database
 *
 * @author 	Manuel Reinhard <manu@sprain.ch>
-* @link		a url
+* @link		https://github.com/sprain/PHP-MySQL-Session-Handler
 */
 
 class SessionHandler{
