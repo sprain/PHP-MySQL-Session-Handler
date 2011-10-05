@@ -50,7 +50,9 @@ class SessionHandler{
 	 * @param 	object	$dbConnection	expects MySQLi object
 	 */
 	public function setDbConnection($dbConnection){
+	
 		$this->dbConnection = $dbConnection;
+		
 	}
 	
 	
@@ -59,7 +61,9 @@ class SessionHandler{
 	 * @param 	object	$dbConnection	expects MySQLi object
 	 */
 	public function setDbTable($dbTable){
+	
 		$this->dbTable = $dbTable;
+		
 	}
 	
 
@@ -98,9 +102,14 @@ class SessionHandler{
             if ($result->num_rows && $result->num_rows > 0) {
                 $record = $result->fetch_assoc();
                 return $record['data'];
+            } else {
+                return false;
             }
+        } else {
+            return false;
         }
-        return '';
+        return true;
+        
     }
     
 
