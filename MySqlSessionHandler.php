@@ -7,7 +7,7 @@
 * @link		https://github.com/sprain/PHP-MySQL-Session-Handler
 */
 
-class SessionHandler{
+class MySqlSessionHandler{
 
     /**
      * a database MySQLi connection resource

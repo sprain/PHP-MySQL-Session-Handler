@@ -1,7 +1,7 @@
 <?php
-require_once('SessionHandler.php');
+require_once('MySqlSessionHandler.php');
 
-$session = new SessionHandler();
+$session = new MySqlSessionHandler();
 
 // add db data
 $session->setDbDetails('localhost', 'username', 'password', 'database');
