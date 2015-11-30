@@ -62,7 +62,7 @@ class MySqlSessionHandler{
     public function open()
     {
         //delete old session handlers
-        $limit = time() - (3600 * 24);
+        $limit = time() - (3600 * 24 * 7);
         $sql = sprintf("DELETE FROM %s WHERE timestamp < %s", $this->dbTable, $limit);
         return $this->dbConnection->query($sql);
     }
@@ -106,11 +106,14 @@ class MySqlSessionHandler{
     public function write($id, $data)
     {
 
-        $sql = sprintf("REPLACE INTO %s VALUES('%s', '%s', '%s')",
+        $sql = sprintf("REPLACE INTO %s VALUES('%s', '%s', '%s', '%s', '%s')",
                        $this->dbTable,
                        $this->dbConnection->escape_string($id),
                        $this->dbConnection->escape_string($data),
-                       time());
+                       time(),
+                       $this->dbConnection->escape_string($_SERVER['REMOTE_ADDR']),
+                       $this->dbConnection->escape_string($_SESSION['hits'])
+        );
         return $this->dbConnection->query($sql);
     }
 
