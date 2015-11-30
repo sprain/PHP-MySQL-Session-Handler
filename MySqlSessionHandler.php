@@ -61,10 +61,10 @@ class MySqlSessionHandler{
      */
     public function open()
     {
-        //delete old session handlers
-        $limit = time() - (3600 * 24 * 7);
-        $sql = sprintf("DELETE FROM %s WHERE timestamp < %s", $this->dbTable, $limit);
-        return $this->dbConnection->query($sql);
+        if (!is_a($this->dbConnection, 'mysqli')){
+            throw new Exception('No session DB connection.');
+        }
+        return true;
     }
 
     /**
@@ -140,6 +140,12 @@ class MySqlSessionHandler{
      */
     public function gc($max)
     {
+        //Delete single use sessions (search-bots etc.)
+        $limit = time() - (3600 * 5);
+        $sql = sprintf("DELETE FROM %s WHERE hits=1 AND timestamp < %s", $this->dbTable, $limit);
+        $this->dbConnection->query($sql);
+        
+        //Delete according to GC $max age setting
         $sql = sprintf("DELETE FROM %s WHERE `timestamp` < '%s'", $this->dbTable, time() - intval($max));
         return $this->dbConnection->query($sql);
     }
