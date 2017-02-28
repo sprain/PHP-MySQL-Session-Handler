@@ -8,12 +8,14 @@ This class is old and I am personally not using it anymore. Maintenance is very 
 ## Usage
 Create a table in your database:
 
-    CREATE TABLE `session_handler_table` (
-    `id` varchar(255) NOT NULL,
-    `data` mediumtext NOT NULL,
-    `timestamp` int(255) NOT NULL,
-    PRIMARY KEY (`id`)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE IF NOT EXISTS `sessions` (
+  `id` varchar(50) NOT NULL,
+  `data` mediumtext NOT NULL,
+  `timestamp` int(255) NOT NULL,
+  `ip` varchar(255) NOT NULL,
+  `hits` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 Then have a look at [example.php](example.php).<br>
